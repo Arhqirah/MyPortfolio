@@ -1,0 +1,146 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import CaseNav from '../../components/CaseNav.astro';
+import ColorBar from '../../components/ColorBar.astro';
+import { projects, adjacent } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { prev, next } = adjacent(project.slug);
+const chLabel = project.channel === 'rum' ? 'Rum' : 'Web';
+const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ');
+---
+
+<Base
+  title={project.title}
+  description={project.summary || `${project.title} — ${chLabel}`}
+>
+  <article data-bar={project.bar}>
+    <header class="edge chead">
+      <p class="label" data-reveal>{meta}</p>
+      <h1 data-reveal style="--rd:60ms">{project.title}</h1>
+      {project.summary && <p class="stand" data-reveal style="--rd:120ms">{project.summary}</p>}
+    </header>
+
+    <div class="hero-shot">
+      <div class="clip">
+        <Picture
+          src={project.image}
+          alt={project.title}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          quality={70}
+          widths={[640, 1024, 1600]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          transition:name={`shot-${project.slug}`}
+        />
+      </div>
+    </div>
+
+    <div class="edge cbody">
+      <dl class="facts" data-reveal>
+        <div><dt class="label">Rolle</dt><dd>{project.role}</dd></div>
+        <div><dt class="label">Sted</dt><dd>{project.place || '—'}</dd></div>
+        {project.stack && (
+          <div><dt class="label">Teknik</dt><dd>{project.stack}</dd></div>
+        )}
+        <div><dt class="label">Kanal</dt><dd>{chLabel}</dd></div>
+      </dl>
+
+      <div class="prose">
+        {project.body.map((para, i) => (
+          <p data-reveal style={`--rd:${i * 40}ms`}>{para}</p>
+        ))}
+        {project.body.length === 0 && (
+          <p class="muted" data-reveal>Beskrivelse følger.</p>
+        )}
+      </div>
+    </div>
+
+    <ColorBar height="6px" />
+    <CaseNav prev={prev} next={next} />
+  </article>
+</Base>
+
+<style>
+  .chead {
+    padding-block: clamp(3rem, 9vh, 6rem) clamp(1.5rem, 4vh, 2.5rem);
+  }
+  .chead .label {
+    margin-bottom: 1.25rem;
+  }
+  .chead h1 {
+    font-size: var(--fs-h1);
+  }
+  .chead .stand {
+    margin-top: 1.35rem;
+    max-width: 46ch;
+    color: var(--muted);
+    font-size: 1.2rem;
+    line-height: 1.45;
+  }
+
+  .hero-shot {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--paper-2);
+    border-top: 3px solid var(--accent, var(--signal));
+  }
+  .hero-shot .clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .hero-shot :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cbody {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-block: clamp(3rem, 8vh, 6rem);
+  }
+  @media (min-width: 820px) {
+    .cbody {
+      grid-template-columns: 17rem 1fr;
+    }
+  }
+
+  .facts {
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+    margin: 0;
+  }
+  .facts > div {
+    display: grid;
+    gap: 0.3rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.55rem;
+  }
+  .facts dd {
+    margin: 0;
+  }
+
+  .prose {
+    display: grid;
+    gap: 1.15rem;
+    max-width: 62ch;
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+  .prose .muted {
+    color: var(--muted);
+  }
+</style>

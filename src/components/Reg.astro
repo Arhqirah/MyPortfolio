@@ -1,0 +1,25 @@
+---
+// A registration / alignment mark — the thing you line a projector up with.
+// Purely decorative.
+const { size = 22, class: cls = '' } = Astro.props;
+---
+
+<svg
+  class:list={['reg', cls]}
+  width={size}
+  height={size}
+  viewBox="0 0 22 22"
+  fill="none"
+  aria-hidden="true"
+>
+  <circle cx="11" cy="11" r="6.2" stroke="currentColor" stroke-width="1" />
+  <path d="M11 0v22M0 11h22" stroke="currentColor" stroke-width="1" />
+</svg>
+
+<style>
+  .reg {
+    display: block;
+    color: var(--muted);
+    opacity: 0.55;
+  }
+</style>

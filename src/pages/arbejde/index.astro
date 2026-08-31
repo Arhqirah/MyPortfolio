@@ -1,0 +1,125 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { projects } from '../../data/projects.js';
+---
+
+<Base
+  title="Arbejde"
+  description="Alle projekter — levende billeder til fysiske rum og hjemmesider til mindre virksomheder."
+>
+  <section class="edge head">
+    <h1 data-reveal>Arbejde</h1>
+    <div class="switch" role="tablist" aria-label="Filtrér efter kanal">
+      <button type="button" data-filter="all" class="press is-on" role="tab" aria-selected="true">
+        Alle
+      </button>
+      <button type="button" data-filter="rum" class="press" role="tab" aria-selected="false">
+        Rum
+      </button>
+      <button type="button" data-filter="web" class="press" role="tab" aria-selected="false">
+        Web
+      </button>
+    </div>
+  </section>
+
+  <section class="edge grid work-grid" id="work-grid">
+    {
+      projects.map((p, i) => (
+        <div class="cell" data-channel={p.channel}>
+          <WorkCard project={p} index={i} />
+        </div>
+      ))
+    }
+  </section>
+
+  <div class="reticle" aria-hidden="true" hidden>
+    <svg viewBox="0 0 40 40" width="40" height="40" fill="none">
+      <circle cx="20" cy="20" r="9" stroke="currentColor" stroke-width="1" />
+      <path d="M20 1v11M20 28v11M1 20h11M28 20h11" stroke="currentColor" stroke-width="1" />
+    </svg>
+  </div>
+</Base>
+
+<style>
+  .head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-block: clamp(3rem, 9vh, 6rem) clamp(2rem, 5vh, 3.5rem);
+  }
+  .head h1 {
+    font-size: var(--fs-h1);
+  }
+
+  .switch {
+    display: flex;
+    gap: 0.25rem;
+  }
+  .switch button {
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out);
+  }
+  .switch button.is-on {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .work-grid {
+    padding-bottom: var(--sect);
+    row-gap: clamp(2.75rem, 8vw, 5rem);
+    transition: opacity 130ms var(--ease-out), filter 130ms var(--ease-out);
+  }
+  .work-grid.swapping {
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+
+  .cell {
+    grid-column: span 12;
+  }
+  @media (min-width: 720px) {
+    .cell {
+      grid-column: span 6;
+    }
+    .cell:nth-child(4n + 2),
+    .cell:nth-child(4n + 3) {
+      transform: translateY(2.75rem);
+    }
+  }
+  .cell[hidden] {
+    display: none;
+  }
+
+  /* cursor registration reticle — align the projector (desktop, motion on) */
+  .reticle {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    color: var(--signal);
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform;
+    transition: opacity 0.25s var(--ease-out);
+    filter: drop-shadow(var(--glow));
+  }
+  .reticle.on {
+    opacity: 0.9;
+  }
+</style>
+

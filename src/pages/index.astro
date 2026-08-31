@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Seeking from '../components/Seeking.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { featured, projects, rumProjects, webProjects } from '../data/projects.js';
+---
+
+<Base>
+  <Hero />
+  <Seeking />
+
+  <section class="edge block">
+    <div class="block-head">
+      <h2 data-reveal>Udvalgt arbejde</h2>
+      <a href="/arbejde" class="label press" data-reveal>Alt arbejde ({projects.length}) →</a>
+    </div>
+
+    <div class="feat">
+      {featured.map((p, i) => <WorkCard project={p} index={i} />)}
+    </div>
+  </section>
+
+  <section class="edge block channels">
+    <div data-reveal>
+      <p class="label">Kanal 01</p>
+      <h3>Rum — {rumProjects.length} projekter</h3>
+      <p>Video, animation og projection mapping til museer og oplevelsescentre.</p>
+      <a href="/arbejde" class="label press">Se rum-arbejde →</a>
+    </div>
+    <div data-reveal style="--rd:70ms">
+      <p class="label">Kanal 02 — det jeg satser på</p>
+      <h3>Web — {webProjects.length} projekter</h3>
+      <p>
+        Fra WordPress-sider for mindre virksomheder til håndkodet frontend i Astro og React.
+        Denne side er det seneste — bygget fra bunden, uden template.
+      </p>
+      <a href="/arbejde" class="label press">Se web-arbejde →</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .block {
+    padding-block: var(--sect);
+  }
+
+  .block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: clamp(2rem, 6vh, 4rem);
+  }
+  .block-head h2 {
+    font-size: var(--fs-h2);
+  }
+
+  .feat {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.75rem, 8vw, 5.5rem);
+  }
+  @media (min-width: 820px) {
+    .feat {
+      grid-template-columns: 1fr 1fr;
+    }
+    .feat > :nth-child(2) {
+      margin-top: 4.5rem;
+    }
+    .feat > :nth-child(3) {
+      margin-top: -1.5rem;
+    }
+  }
+
+  .channels {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 820px) {
+    .channels {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+    }
+  }
+  .channels h3 {
+    font-size: var(--fs-h3);
+    margin: 0.6rem 0;
+  }
+  .channels p {
+    color: var(--muted);
+    max-width: 36ch;
+    margin-bottom: 1rem;
+  }
+</style>

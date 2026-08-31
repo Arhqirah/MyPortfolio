@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import Reg from '../components/Reg.astro';
+import { about, seeking } from '../data/site.js';
+
+const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponent(
+  seeking.mailSubject,
+)}`;
+---
+
+<Base
+  title="Om"
+  description="Multimediedesigner-studerende på KEA. Søger praktikplads som webudvikler i forår 2027."
+>
+  <section class="edge om">
+    <p class="label" data-reveal>Om</p>
+    <h1 class="lead" data-reveal style="--rd:60ms">{about.lead}</h1>
+
+    <div class="seek" data-reveal style="--rd:100ms">
+      <div>
+        <p class="label">Søger</p>
+        <p class="seek-role">{seeking.role}</p>
+        <p class="label">{seeking.period} · {seeking.location}</p>
+      </div>
+      <a class="btn press" href={mailto}>Skriv om praktik →</a>
+    </div>
+
+    <div class="cols">
+      <div class="prose">
+        {about.body.map((p, i) => (
+          <p data-reveal style={`--rd:${i * 40}ms`}>{p}</p>
+        ))}
+      </div>
+
+      <aside class="side">
+        <div data-reveal>
+          <p class="label">Baggrund</p>
+          <ul class="cv">
+            {about.cv.map((c) => (
+              <li>
+                <span class="role">{c.role}</span>
+                <span class="place">{c.place}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div data-reveal style="--rd:70ms">
+          <p class="label">Kan</p>
+          <ul class="chips">
+            {about.skills.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    <Reg size={24} class="mark" />
+  </section>
+</Base>
+
+<style>
+  .om {
+    position: relative;
+    padding-block: clamp(3rem, 9vh, 6rem) var(--sect);
+  }
+
+  .lead {
+    margin: 1.5rem 0 clamp(2rem, 6vh, 3rem);
+    max-width: 24ch;
+    font-size: var(--fs-h1);
+  }
+
+  .seek {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    margin-bottom: clamp(3rem, 9vh, 5.5rem);
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--signal);
+  }
+  .seek-role {
+    font-family: var(--font-display);
+    font-weight: 640;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    letter-spacing: -0.02em;
+    margin: 0.35rem 0;
+  }
+  .seek .btn {
+    display: inline-block;
+    padding: 0.75rem 1.15rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: var(--glow);
+    white-space: nowrap;
+  }
+
+  .cols {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  @media (min-width: 860px) {
+    .cols {
+      grid-template-columns: 1fr 18rem;
+    }
+  }
+
+  .prose {
+    display: grid;
+    gap: 1.2rem;
+    max-width: 60ch;
+    font-size: 1.12rem;
+    line-height: 1.6;
+  }
+
+  .side {
+    display: grid;
+    gap: 2.5rem;
+    align-content: start;
+  }
+
+  .cv {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .cv li {
+    display: grid;
+    gap: 0.15rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
+  }
+  .cv .place {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .chips {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chips li {
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .mark {
+    position: absolute;
+    right: var(--edge);
+    top: clamp(3rem, 9vh, 6rem);
+  }
+  @media (max-width: 720px) {
+    .mark {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,296 @@
+/* ==================================================================
+   Simon Melbye Andersen — design system
+   Broadcast/studio: ink on warm paper, one signal-blue, a six-hue
+   colour-bar set, registration-mark detailing. Oversized Bricolage
+   display + Hanken body + Martian Mono labels.
+   ================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* neutrals — warm, chosen (not default grey) */
+  --paper: #fbfaf6;
+  --paper-2: #efece4;
+  --ink: #16161a;
+  --line: #dcd8cf;
+  --muted: #6b6860;
+
+  /* the one bold accent */
+  --signal: #1e5be0;
+  --glow: 0 0 0 transparent; /* dark theme turns this into a phosphor glow */
+  --scan: 0; /* dark theme -> 1, drives the scanline overlay */
+
+  /* broadcast colour bars */
+  --bar-y: #e4b22e;
+  --bar-c: #2fa9bc;
+  --bar-g: #3c9f66;
+  --bar-m: #bf4b92;
+  --bar-r: #d63e2a;
+  --bar-b: #2b4fc2;
+
+  /* layout */
+  --edge: clamp(1.25rem, 4vw, 3.5rem);
+  --maxw: 1440px;
+  --gap: clamp(1rem, 2vw, 1.75rem);
+  --sect: clamp(5rem, 13vh, 10rem);
+
+  /* type */
+  --font-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --fs-display: clamp(3rem, 11.5vw, 11rem);
+  --fs-h1: clamp(2.4rem, 6.2vw, 5.25rem);
+  --fs-h2: clamp(1.7rem, 3.6vw, 3rem);
+  --fs-h3: clamp(1.25rem, 2vw, 1.6rem);
+
+  /* motion — Emil's curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --spring: linear(
+    0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%,
+    0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%,
+    1.001 100%
+  );
+  --dur-fast: 140ms;
+  --dur: 220ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #101013;
+    --paper-2: #1a1a1f;
+    --ink: #f1efe8;
+    --line: #2c2c33;
+    --muted: #928e83;
+    --signal: #6e92f2;
+    --glow: 0 0 24px rgba(110, 146, 242, 0.32);
+    --scan: 1;
+    --bar-y: #f2c651;
+    --bar-c: #48c6da;
+    --bar-g: #52c084;
+    --bar-m: #d96fb2;
+    --bar-r: #ef5c46;
+    --bar-b: #5c78ec;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #101013;
+  --paper-2: #1a1a1f;
+  --ink: #f1efe8;
+  --line: #2c2c33;
+  --muted: #928e83;
+  --signal: #6e92f2;
+  --glow: 0 0 24px rgba(110, 146, 242, 0.32);
+  --scan: 1;
+  --bar-y: #f2c651;
+  --bar-c: #48c6da;
+  --bar-g: #52c084;
+  --bar-m: #d96fb2;
+  --bar-r: #ef5c46;
+  --bar-b: #5c78ec;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* dark = calibration monitor: faint scanlines (var(--scan) is 1 only in dark) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: calc(var(--scan) * 0.5);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0 1px,
+    transparent 1px 3px
+  );
+  transition: opacity 0.4s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 640;
+  font-optical-sizing: auto;
+  line-height: 1;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--signal);
+  color: #fff;
+}
+
+/* --- layout helpers ------------------------------------------------ */
+
+.edge {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--edge);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* --- colour bars ------------------------------------------------- */
+
+.colorbar {
+  display: flex;
+  width: 100%;
+  height: var(--bar-h, 6px);
+}
+
+.colorbar > i {
+  flex: 1;
+}
+.colorbar > i:nth-child(1) { background: var(--bar-y); }
+.colorbar > i:nth-child(2) { background: var(--bar-c); }
+.colorbar > i:nth-child(3) { background: var(--bar-g); }
+.colorbar > i:nth-child(4) { background: var(--bar-m); }
+.colorbar > i:nth-child(5) { background: var(--bar-r); }
+.colorbar > i:nth-child(6) { background: var(--bar-b); }
+
+/* per-project accent, set via data-bar="y|c|g|m|r|b" */
+[data-bar="y"] { --accent: var(--bar-y); }
+[data-bar="c"] { --accent: var(--bar-c); }
+[data-bar="g"] { --accent: var(--bar-g); }
+[data-bar="m"] { --accent: var(--bar-m); }
+[data-bar="r"] { --accent: var(--bar-r); }
+[data-bar="b"] { --accent: var(--bar-b); }
+
+/* --- focus ------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+.skip {
+  position: fixed;
+  top: -100%;
+  left: var(--edge);
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+.skip:focus {
+  top: 0.75rem;
+}
+
+/* --- reveal on scroll (toggled by src/scripts/ui.js) ------------- */
+
+[data-reveal],
+[data-reveal-img] {
+  transition:
+    opacity 0.6s var(--ease-out) var(--rd, 0ms),
+    transform 0.6s var(--ease-out) var(--rd, 0ms),
+    clip-path 0.8s var(--ease-out) var(--rd, 0ms);
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.js [data-reveal-img] {
+  clip-path: inset(0 0 100% 0);
+}
+
+[data-reveal].is-in,
+[data-reveal-img].is-in {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* pressable feel */
+.press {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.press:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js [data-reveal],
+  .js [data-reveal-img] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}

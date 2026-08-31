@@ -1,0 +1,48 @@
+---
+const { prev, next } = Astro.props;
+---
+
+<nav class="casenav edge" aria-label="Flere projekter">
+  <a href={`/arbejde/${prev.slug}`} class="press" data-bar={prev.bar}>
+    <span class="label">← Forrige</span>
+    <span class="t">{prev.title}</span>
+  </a>
+  <a href={`/arbejde/${next.slug}`} class="press end" data-bar={next.bar}>
+    <span class="label">Næste →</span>
+    <span class="t">{next.title}</span>
+  </a>
+</nav>
+
+<style>
+  .casenav {
+    display: grid;
+    gap: 1px;
+    padding-block: clamp(2.5rem, 7vh, 4.5rem);
+  }
+  @media (min-width: 640px) {
+    .casenav {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .casenav a {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.5rem 0;
+    border-top: 2px solid var(--accent, var(--line));
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .casenav a:hover {
+    color: var(--signal);
+  }
+  .casenav .end {
+    text-align: right;
+    justify-items: end;
+  }
+  .casenav .t {
+    font-family: var(--font-display);
+    font-weight: 640;
+    font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+    letter-spacing: -0.02em;
+  }
+</style>

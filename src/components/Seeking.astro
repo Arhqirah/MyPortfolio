@@ -1,0 +1,124 @@
+---
+import ColorBar from './ColorBar.astro';
+import { seeking, colophon } from '../data/site.js';
+
+const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponent(
+  seeking.mailSubject,
+)}`;
+---
+
+<section class="seeking edge" id="praktik">
+  <ColorBar height="6px" />
+
+  <div class="in">
+    <div class="lede" data-reveal>
+      <p class="label">Søger nu</p>
+      <h2>{seeking.role}</h2>
+      <p class="when label">{seeking.period} · {seeking.location}</p>
+    </div>
+
+    <div class="body" data-reveal style="--rd:70ms">
+      <p>{seeking.blurb}</p>
+
+      <ul class="chips">
+        {seeking.stack.map((s) => <li>{s}</li>)}
+      </ul>
+
+      <p class="colophon">{colophon.text}</p>
+
+      <div class="cta">
+        <a class="btn press" href={mailto}>Skriv om praktik →</a>
+        <a class="ghost press" href={colophon.repoUrl} target="_blank" rel="noopener">
+          Se koden til denne side →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .seeking {
+    padding-block: var(--sect);
+  }
+
+  .in {
+    display: grid;
+    gap: clamp(1.75rem, 5vw, 3.5rem);
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  }
+  @media (min-width: 900px) {
+    .in {
+      grid-template-columns: 0.85fr 1.15fr;
+      align-items: start;
+    }
+  }
+
+  .lede h2 {
+    margin: 0.5rem 0 0.75rem;
+    font-size: var(--fs-h2);
+  }
+
+  .body p {
+    max-width: 58ch;
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+
+  .chips {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chips li {
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--signal);
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .colophon {
+    margin-top: 1.25rem;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.75rem;
+    margin-top: 1.75rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.15rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: var(--glow);
+  }
+  .ghost {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .ghost:hover {
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+import ColorBar from './ColorBar.astro';
+import Reg from './Reg.astro';
+import { colophon } from '../data/site.js';
+---
+
+<section class="hero edge">
+  <p class="label kicker" data-reveal>
+    Multimediedesigner · KEA — søger praktikplads som webudvikler
+  </p>
+
+  <h1 class="statement">
+    <span class="ln" data-reveal>Levende billeder</span>
+    <span class="ln indent" data-reveal style="--rd:70ms">til <em>store rum</em></span>
+    <span class="ln indent-2" data-reveal style="--rd:140ms">og små skærme.</span>
+  </h1>
+
+  <div class="hfoot" data-reveal style="--rd:210ms">
+    <ColorBar height="10px" />
+    <p class="row">
+      <span>Praktik forår 2027 · København-området</span>
+      <a class="src" href={colophon.repoUrl} target="_blank" rel="noopener">
+        Siden er kodet i Astro — se koden →
+      </a>
+    </p>
+  </div>
+
+  <Reg size={26} class="mark" />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(2.5rem, 9vh, 7rem) var(--sect);
+  }
+
+  .kicker {
+    display: block;
+    margin-bottom: clamp(1.5rem, 5vh, 3rem);
+  }
+
+  .statement {
+    display: grid;
+    font-size: var(--fs-display);
+    font-weight: 640;
+  }
+  .ln {
+    display: block;
+  }
+  .ln em {
+    font-style: normal;
+    color: var(--signal);
+    text-shadow: var(--glow);
+  }
+  .indent {
+    margin-left: clamp(1rem, 13vw, 10rem);
+  }
+  .indent-2 {
+    margin-left: clamp(0.5rem, 5vw, 4rem);
+  }
+
+  .hfoot {
+    margin-top: clamp(2.5rem, 8vh, 5rem);
+    display: grid;
+    gap: 1rem;
+  }
+  .hfoot .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .hfoot .src {
+    color: var(--signal);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+
+  .mark {
+    position: absolute;
+    right: var(--edge);
+    top: 42%;
+  }
+
+  @media (max-width: 720px) {
+    .indent,
+    .indent-2 {
+      margin-left: 0;
+    }
+    .mark {
+      display: none;
+    }
+  }
+</style>

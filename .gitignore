@@ -1,0 +1,18 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.production
+
+# raw video masters — compress + host externally, don't commit
+media-src/
+
+# editor / os
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
