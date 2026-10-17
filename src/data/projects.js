@@ -63,8 +63,8 @@ export const projects = [
     stack: 'Next.js · TypeScript · Tailwind · Flask · MySQL · Claude API · Docker',
     bar: 'r',
     image: vinfinder,
-    link: 'https://vinfinder.vercel.app/',
-    linkLabel: 'Prøv den selv →',
+    // Ingen live-link med vilje: hvert kald rammer Claude API og koster
+    // rigtige penge pr. søgning, så siden skal ikke kunne spammes herfra.
   },
   {
     slug: 'washworld-docker',
