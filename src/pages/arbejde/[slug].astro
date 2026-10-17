@@ -11,7 +11,7 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const { prev, next } = adjacent(project.slug);
-const chLabel = project.channel === 'rum' ? 'Rum' : 'Web';
+const chLabel = project.channel === 'udstilling' ? 'Udstilling' : 'Web';
 const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ');
 ---
 

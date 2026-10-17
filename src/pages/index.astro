@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Seeking from '../components/Seeking.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { featured, projects, rumProjects, webProjects } from '../data/projects.js';
+import { featured, projects, udstillingProjects, webProjects } from '../data/projects.js';
 ---
 
 <Base>
@@ -24,9 +24,9 @@ import { featured, projects, rumProjects, webProjects } from '../data/projects.j
   <section class="edge block channels">
     <div data-reveal>
       <p class="label">Kanal 01</p>
-      <h3>Rum — {rumProjects.length} projekter</h3>
+      <h3>Udstilling — {udstillingProjects.length} projekter</h3>
       <p>Video, animation og projection mapping til museer og oplevelsescentre.</p>
-      <a href="/arbejde" class="label press">Se rum-arbejde →</a>
+      <a href="/arbejde" class="label press">Se udstillingsarbejde →</a>
     </div>
     <div data-reveal style="--rd:70ms">
       <p class="label">Kanal 02 — det jeg satser på</p>

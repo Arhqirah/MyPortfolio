@@ -1,6 +1,6 @@
 /**
  * Every project, one flat list. `channel` splits the two disciplines:
- *   'rum' — levende billeder til fysiske rum (installations, museums)
+ *   'udstilling' — levende billeder til fysiske rum (installations, museums)
  *   'web' — hjemmesider til mindre virksomheder
  *
  * Images live in src/assets/work/ and are imported below, then optimised at
@@ -15,7 +15,7 @@
  *   bar      which colour-bar hue tags this project
  */
 
-// rum
+// udstilling
 import vadehavscentret from '../assets/work/vadehavscentret.webp';
 import naturkraft from '../assets/work/naturkraft.webp';
 import ragnarock from '../assets/work/ragnarock.webp';
@@ -43,7 +43,7 @@ import aplusbad from '../assets/work/aplusbad.webp';
 export const projects = [
   {
     slug: 'vadehavscentret',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Vadehavscentret',
     role: 'Projection mapping · Video · Udstillingsopsætning',
     place: 'Ribe',
@@ -59,7 +59,7 @@ export const projects = [
   },
   {
     slug: 'naturkraft',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Naturkraft',
     role: 'Video · Animation · Projektion',
     place: 'Ringkøbing',
@@ -73,7 +73,7 @@ export const projects = [
   },
   {
     slug: 'ragnarock',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'RAGNAROCK',
     role: 'Projektion · Multiskærm',
     place: 'Roskilde',
@@ -88,7 +88,7 @@ export const projects = [
   },
   {
     slug: 'toendermarsken',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Tøndermarsken',
     role: 'Video · Animation · Projektion',
     place: 'Højer',
@@ -102,7 +102,7 @@ export const projects = [
   },
   {
     slug: 'strandingsmuseum-st-george',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Strandingsmuseum St. George',
     role: 'Filmprojektion · Interaktivt gulv',
     place: 'Thorsminde',
@@ -117,7 +117,7 @@ export const projects = [
   },
   {
     slug: 'den-gamle-by',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Den Gamle By',
     role: 'Film · Animation · Greenscreen',
     place: 'Aarhus',
@@ -132,7 +132,7 @@ export const projects = [
   },
   {
     slug: 'teknisk-museum',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Teknisk Museum',
     role: 'Animation · Gamification',
     place: 'Helsingør',
@@ -146,7 +146,7 @@ export const projects = [
   },
   {
     slug: 'roskilde-domkirke',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Roskilde Domkirke',
     role: 'VR · Udendørs installation',
     place: 'Roskilde',
@@ -160,7 +160,7 @@ export const projects = [
   },
   {
     slug: 'lejre',
-    channel: 'rum',
+    channel: 'udstilling',
     title: 'Lejre',
     role: 'AR · Billedmateriale',
     place: 'Lejre',
@@ -332,7 +332,7 @@ export const projects = [
   },
 ];
 
-export const rumProjects = projects.filter((p) => p.channel === 'rum');
+export const udstillingProjects = projects.filter((p) => p.channel === 'udstilling');
 export const webProjects = projects.filter((p) => p.channel === 'web');
 
 export const featured = ['vadehavscentret', 'ragnarock', 'strandingsmuseum-st-george', 'naturkraft']
@@ -350,4 +350,4 @@ export const adjacent = (slug) => {
   };
 };
 
-export const channelLabel = { rum: 'Rum', web: 'Web' };
+export const channelLabel = { udstilling: 'Udstilling', web: 'Web' };
