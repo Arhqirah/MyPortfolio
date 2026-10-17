@@ -26,7 +26,7 @@ const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ')
       {project.summary && <p class="stand" data-reveal style="--rd:120ms">{project.summary}</p>}
     </header>
 
-    <div class="hero-shot">
+    <div class:list={['hero-shot', { contain: project.imageFit === 'contain' }]}>
       <div class="clip">
         <Picture
           src={project.image}
@@ -114,6 +114,32 @@ const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ')
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* mobile/portrait screenshots: show the whole screen instead of cropping
+     it into a 16:9 band — a dark letterbox stands in for a phone bezel */
+  .hero-shot.contain {
+    aspect-ratio: auto;
+    min-height: 26rem;
+    max-height: 82vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+  }
+  .hero-shot.contain .clip {
+    position: static;
+    inset: auto;
+    overflow: visible;
+    height: 100%;
+  }
+  .hero-shot.contain :global(img) {
+    position: static;
+    inset: auto;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .cbody {

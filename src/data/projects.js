@@ -17,6 +17,7 @@
 
 // flagship — real stack, shown first
 import vinfinder from '../assets/work/vinfinder.png';
+import washworldDocker from '../assets/work/washworld-docker.png';
 
 // udstilling
 import vadehavscentret from '../assets/work/vadehavscentret.webp';
@@ -64,6 +65,27 @@ export const projects = [
     image: vinfinder,
     link: 'https://vinfinder.vercel.app/',
     linkLabel: 'Prøv den selv →',
+  },
+  {
+    slug: 'washworld-docker',
+    channel: 'web',
+    title: 'WashWorld — containeriseret',
+    role: 'Docker & infrastruktur — individuel opgave',
+    place: 'Kursusprojekt — Development Environments',
+    year: null, // TODO Simon: hvilket år?
+    summary:
+      'En eksisterende bilvask-app fra et 4-mands eksamensprojekt, pakket i en reproducerbar Docker Compose-opsætning med fire services, eget netværk og persistente volumes.',
+    body: [
+      'WashWorld er en bilvask-app med booking, abonnementer og et badge-system, bygget som eksamensprojekt af et hold på fire. Jeg var den mest aktive bidragyder på frontend og en af de største på backend — Next.js, TypeScript, Tailwind og TanStack Query med Mapbox i front, Flask og MariaDB med JWT-login i bund.',
+      'Som en selvstændig opgave i faget Development Environments containeriserede jeg bagefter hele stakken: fire services — frontend, backend, MariaDB og phpMyAdmin — på et dedikeret Docker-netværk, named volumes så data overlever genstart, multi-stage Dockerfiles, og ingen containere der kører som root.',
+      'Sat op med ressourcegrænser pr. service og testet ende-til-ende, ikke kun antaget at virke: volume-persistens over et fuldt down/up-cyklus, netværksforbindelse mellem alle fire containere, en frisk clone der virker uden efterladt state, og en rigtig bruger-registrering gennem UI\'et hele vejen til databasen.',
+    ],
+    stack: 'Docker · Docker Compose · Next.js · TypeScript · Flask · MariaDB',
+    bar: 'b',
+    image: washworldDocker,
+    imageFit: 'contain',
+    link: 'https://github.com/Arhqirah/washworld-docker',
+    linkLabel: 'Se koden →',
   },
 
   {
@@ -360,7 +382,7 @@ export const projects = [
 export const udstillingProjects = projects.filter((p) => p.channel === 'udstilling');
 export const webProjects = projects.filter((p) => p.channel === 'web');
 
-export const featured = ['vinfinder', 'ragnarock', 'vadehavscentret', 'strandingsmuseum-st-george']
+export const featured = ['vinfinder', 'washworld-docker', 'ragnarock', 'vadehavscentret']
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter(Boolean);
 
