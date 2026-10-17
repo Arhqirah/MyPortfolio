@@ -1,7 +1,8 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Reg from '../components/Reg.astro';
 import { about, seeking } from '../data/site.js';
+import portrait from '../assets/work/SimonMelbyeAndersen.jpg';
 
 const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponent(
   seeking.mailSubject,
@@ -14,9 +15,26 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
 >
   <section class="edge om">
     <p class="label" data-reveal>Om</p>
-    <h1 class="lead" data-reveal style="--rd:60ms">{about.lead}</h1>
 
-    <div class="seek" data-reveal style="--rd:100ms">
+    <div class="intro">
+      <h1 class="lead" data-reveal style="--rd:60ms">{about.lead}</h1>
+      <div class="portrait" data-reveal style="--rd:90ms">
+        <Picture
+          src={portrait}
+          alt="Simon Melbye Andersen"
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          quality={72}
+          widths={[320, 480, 640]}
+          sizes="(min-width: 860px) 18rem, 60vw"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <div class="seek" data-reveal style="--rd:140ms">
       <div>
         <p class="label">Søger</p>
         <p class="seek-role">{seeking.role}</p>
@@ -60,8 +78,6 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
         ))}
       </div>
     </div>
-
-    <Reg size={24} class="mark" />
   </section>
 </Base>
 
@@ -71,10 +87,39 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
     padding-block: clamp(3rem, 9vh, 6rem) var(--sect);
   }
 
+  .intro {
+    display: grid;
+    gap: clamp(1.75rem, 5vw, 3rem);
+    align-items: start;
+    margin: 1.5rem 0 clamp(2.5rem, 7vh, 4rem);
+  }
+  @media (min-width: 860px) {
+    .intro {
+      grid-template-columns: 1fr 17rem;
+    }
+  }
+
   .lead {
-    margin: 1.5rem 0 clamp(2rem, 6vh, 3rem);
+    margin: 0;
     max-width: 24ch;
     font-size: var(--fs-h1);
+  }
+
+  .portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-width: 17rem;
+    overflow: hidden;
+    background: var(--paper-2);
+    border-top: 3px solid var(--signal);
+  }
+  .portrait :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 32%;
   }
 
   .seek {
@@ -192,14 +237,4 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
     color: var(--muted);
   }
 
-  .mark {
-    position: absolute;
-    right: var(--edge);
-    top: clamp(3rem, 9vh, 6rem);
-  }
-  @media (max-width: 720px) {
-    .mark {
-      display: none;
-    }
-  }
 </style>
