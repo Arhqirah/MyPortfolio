@@ -35,8 +35,8 @@ export const seeking = {
   period: 'Forår 2027 · 3. semester, KEA',
   location: 'København-området',
   blurb:
-    'Jeg søger en praktikplads hvor jeg kan arbejde med frontend i et team og blive skarpere som udvikler. Jeg kommer med en baggrund i film- og udstillingsproduktion, så jeg er vant til at bygge noget der skal virke for et publikum — nu i kode.',
-  stack: ['JavaScript', 'React', 'Astro', 'HTML & CSS', 'Git', 'Figma'],
+    'Jeg søger en praktikplads hvor jeg kan arbejde med webudvikling i et team og blive skarpere som udvikler — frontend og backend. Jeg kommer med en baggrund i film- og udstillingsproduktion, så jeg er vant til at bygge noget der skal virke for et publikum — nu i kode.',
+  stack: ['TypeScript', 'React · Next.js', 'Astro', 'Python · Flask', 'MySQL', 'Docker', 'Git'],
   mailSubject: 'Praktikplads — webudvikling',
 };
 
@@ -62,14 +62,41 @@ export const about = {
     { role: 'Produktion', place: 'TV2 Bornholm' },
   ],
   skills: [
-    'Projection mapping',
-    'Videoproduktion',
-    'Animation',
-    'Udstillingsdesign',
-    'Figma',
-    'HTML · CSS · JS',
-    'React · Astro',
-    'WordPress · Elementor',
+    {
+      group: 'Frontend',
+      items: [
+        'JavaScript & TypeScript',
+        'React & Next.js (App Router)',
+        'Astro',
+        'HTML & CSS / Tailwind CSS',
+        'TanStack Query',
+      ],
+    },
+    {
+      group: 'Backend & data',
+      items: [
+        'Python / Flask (REST API\'er)',
+        'MySQL / MariaDB',
+        'JWT-autentificering',
+        'Web scraping (Shopify)',
+      ],
+    },
+    {
+      group: 'DevOps & værktøjer',
+      items: ['Git & GitHub', 'Docker & Docker Compose', 'Deployment (Railway)'],
+    },
+    {
+      group: 'AI & integrationer',
+      items: ['Claude API (inkl. vision / billedgenkendelse)', 'Mapbox / geolocation'],
+    },
+    {
+      group: 'Design',
+      items: ['Figma', 'UX/UI & mobile-first design', 'Prototyping og design guides'],
+    },
+    {
+      group: 'Andet',
+      items: ['Shopify / Liquid', 'Godot (GDScript)', 'Film/TV- og multimedieproduktion'],
+    },
   ],
 };
 

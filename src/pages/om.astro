@@ -44,14 +44,21 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
             ))}
           </ul>
         </div>
-
-        <div data-reveal style="--rd:70ms">
-          <p class="label">Kan</p>
-          <ul class="chips">
-            {about.skills.map((s) => <li>{s}</li>)}
-          </ul>
-        </div>
       </aside>
+    </div>
+
+    <div class="skills" data-reveal style="--rd:70ms">
+      <p class="label">Kan</p>
+      <div class="skill-grid">
+        {about.skills.map((group) => (
+          <div class="skill-group">
+            <p class="group-label">{group.group}</p>
+            <ul class="chips">
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
 
     <Reg size={24} class="mark" />
@@ -144,9 +151,32 @@ const mailto = `mailto:simonmelbyeandersen@gmail.com?subject=${encodeURIComponen
     font-size: 0.95rem;
   }
 
+  .skills {
+    margin-top: clamp(3rem, 8vh, 5.5rem);
+    padding-top: clamp(2rem, 5vh, 3rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .skill-grid {
+    margin-top: clamp(1.5rem, 4vh, 2.25rem);
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 2.75rem);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+
+  .group-label {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+
   .chips {
     list-style: none;
-    margin: 1rem 0 0;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
