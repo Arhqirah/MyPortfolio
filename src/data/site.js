@@ -31,8 +31,7 @@ export const contact = [
 // The internship pitch — shown high on the front page and on /om.
 export const seeking = {
   role: 'Praktikplads som webudvikler',
-  // TODO Simon: sæt de rigtige datoer/uger for praktikperioden på EK
-  period: 'Praktik under webudvikler-uddannelsen, EK',
+  period: '18. januar – 31. marts 2027',
   location: 'København-området',
   blurb:
     'Jeg søger en praktikplads hvor jeg kan arbejde med webudvikling i et team og blive skarpere som udvikler — frontend og backend. Jeg kommer med en baggrund i film- og udstillingsproduktion, så jeg er vant til at bygge noget der skal virke for et publikum — nu i kode.',
@@ -52,7 +51,7 @@ export const about = {
     'Jeg er webudvikler-studerende på EK. Jeg har en afsluttet uddannelse som multimediedesigner fra KEA i bagagen og en baggrund som film- og tv-produktionstekniker fra Media College Denmark, hvor jeg arbejdede med produktion hos blandt andre No Parking Production og TV2 Bornholm.',
   body: [
     'Jeg arbejder i to spor. Det ene er levende billeder til fysiske rum — video, animation og projection mapping til museer og oplevelsescentre. Det andet, og det jeg uddanner mig til nu, er web: fra WordPress-sider for mindre virksomheder til håndkodede sider i Astro og React — som denne.',
-    'Jeg søger en praktikplads som webudvikler i min praktikperiode på EK, gerne i København-området. Jeg lærer hurtigt, kan lide at bygge ting der virker for rigtige brugere, og vil gerne ind i et team hvor jeg kan blive dygtigere.',
+    'Jeg søger en praktikplads som webudvikler fra 18. januar til 31. marts 2027, gerne i København-området. Jeg lærer hurtigt, kan lide at bygge ting der virker for rigtige brugere, og vil gerne ind i et team hvor jeg kan blive dygtigere.',
     'Jeg holder af det enkle, det langtidsholdbare og roen i at gå en tur langs vandet. Jeg bor i Birkerød.',
   ],
   cv: [
