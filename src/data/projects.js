@@ -15,6 +15,9 @@
  *   bar      which colour-bar hue tags this project
  */
 
+// flagship — real stack, shown first
+import vinfinder from '../assets/work/vinfinder.png';
+
 // udstilling
 import vadehavscentret from '../assets/work/vadehavscentret.webp';
 import naturkraft from '../assets/work/naturkraft.webp';
@@ -41,6 +44,28 @@ import avc from '../assets/work/avc.webp';
 import aplusbad from '../assets/work/aplusbad.webp';
 
 export const projects = [
+  // --- flagship web project, kept first so it's seen before anything else ---
+  {
+    slug: 'vinfinder',
+    channel: 'web',
+    title: 'VinFinder',
+    role: 'Fullstack-prototype — design & build',
+    place: 'Vinifera, vinspecialist i Birkerød',
+    year: null, // TODO Simon: hvilket år byggede du den?
+    summary:
+      'En vinfinder der tager mod en sætning som "en frugtig vin til en romantisk middag" og peger på konkrete flasker fra en rigtig vinbutiks eget sortiment — med AI-forklaring og kort over hvor de står på hylden.',
+    body: [
+      'VinFinder er en selvstændig prototype bygget omkring en rigtig vinbutik, Vinifera i Birkerød, og dens faktiske sortiment på omkring 500 flasker — ikke et bestilt kundeprojekt, men et fuldt funktionelt system fra scraping til UI.',
+      'Dataflowet: en scraper henter butikkens sortiment fra Shopify og gemmer det struktureret i MySQL. Claude API analyserer hver vins smagsnote og udleder sødme, fylde, syre, tannin og frugtighed på en skala, plus anledningstags — så en Flask-API kan filtrere databasen og lade Claude forklare og rangere blandt de vine der rent faktisk findes på hylden. Den kan ikke opfinde en vin der ikke er der.',
+      'Frontend er Next.js (App Router) og TypeScript med Tailwind: hurtige anledningsvalg, type/land/smagsprofil-filtre, dansk/engelsk sprogskift, lys/mørk tema, "find lignende" og et kort der viser præcis hvilken hylde flasken står på.',
+    ],
+    stack: 'Next.js · TypeScript · Tailwind · Flask · MySQL · Claude API · Docker',
+    bar: 'r',
+    image: vinfinder,
+    link: 'https://vinfinder.vercel.app/',
+    linkLabel: 'Prøv den selv →',
+  },
+
   {
     slug: 'vadehavscentret',
     channel: 'udstilling',
@@ -335,7 +360,7 @@ export const projects = [
 export const udstillingProjects = projects.filter((p) => p.channel === 'udstilling');
 export const webProjects = projects.filter((p) => p.channel === 'web');
 
-export const featured = ['vadehavscentret', 'ragnarock', 'strandingsmuseum-st-george', 'naturkraft']
+export const featured = ['vinfinder', 'ragnarock', 'vadehavscentret', 'strandingsmuseum-st-george']
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter(Boolean);
 

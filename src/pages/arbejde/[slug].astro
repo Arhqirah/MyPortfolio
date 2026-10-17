@@ -52,6 +52,16 @@ const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ')
           <div><dt class="label">Teknik</dt><dd>{project.stack}</dd></div>
         )}
         <div><dt class="label">Kanal</dt><dd>{chLabel}</dd></div>
+        {project.link && (
+          <div>
+            <dt class="label">Link</dt>
+            <dd>
+              <a class="livelink" href={project.link} target="_blank" rel="noopener">
+                {project.linkLabel || 'Besøg →'}
+              </a>
+            </dd>
+          </div>
+        )}
       </dl>
 
       <div class="prose">
@@ -131,6 +141,16 @@ const meta = [chLabel, project.place, project.year].filter(Boolean).join(' · ')
   }
   .facts dd {
     margin: 0;
+  }
+  .livelink {
+    color: var(--signal);
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--dur-fast) var(--ease-out);
+  }
+  .livelink:hover {
+    text-decoration-color: currentColor;
   }
 
   .prose {
